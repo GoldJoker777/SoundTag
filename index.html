@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+        }
+        .button {
+            width: 150px;
+            height: 150px;
+            background: #ff0000;
+            border-radius: 50%;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <button class="button" id="btn"></button>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const audio = new Audio('https://www.myinstants.com/media/sounds/oriol-11420.mp3');
+        
+        // Разблокировка аудио на iOS
+        document.addEventListener('touchstart', () => {}, { once: true });
+        
+        btn.addEventListener('click', () => {
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log(e));
+        });
+    </script>
+</body>
+</html>
