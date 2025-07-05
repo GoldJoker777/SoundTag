@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -21,16 +21,19 @@
     <button id="btn"></button>
 
     <script>
-      // Фикс для мобилок (разблокировка звука)
-      document.addEventListener('touchstart', function() {
-        new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU...').play()
-      }, { once: true });
+        // Фикс для мобилок
+        document.addEventListener('touchstart', function() {
+            new Audio().play().catch(e=>{});
+        }, {once:true});
 
-      // Основной скрипт
-      document.getElementById('btn').onclick = function() {
-        new Audio('https://soundinstants.com/ru/sound/deg-deg.mp3').play()
-          .catch(e => alert("Нажмите 'Разрешить', если браузер запросил доступ к звуку"));
-      };
+        // Основной скрипт
+        document.getElementById('btn').onclick = function() {
+            const audio = new Audio('sound.mp3'); // Файл должен лежать рядом с HTML
+            audio.play().catch(e => {
+                alert("Разреши звук, если браузер запросил!");
+                console.error("Ошибка:", e);
+            });
+        };
     </script>
 </body>
 </html>
