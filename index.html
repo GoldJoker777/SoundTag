@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        body {margin:0;padding:0;overflow:hidden;background:#fff;height:100vh;}
+        #btn {
+            position:absolute;
+            width:90vmin;
+            height:90vmin;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            border-radius:50%;
+            background:#f00;
+            border:none;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn"></button>
+
+    <script>
+      // Фикс для мобилок (разблокировка звука)
+      document.addEventListener('touchstart', function() {
+        new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU...').play()
+      }, { once: true });
+
+      // Основной скрипт
+      document.getElementById('btn').onclick = function() {
+        new Audio('https://soundinstants.com/ru/sound/deg-deg.mp3').play()
+          .catch(e => alert("Нажмите 'Разрешить', если браузер запросил доступ к звуку"));
+      };
+    </script>
+</body>
+</html>
