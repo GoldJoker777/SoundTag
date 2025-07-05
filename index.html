@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КНОПКА С ЗВУКОМ</title>
     <style>
         body {
             margin: 0;
@@ -10,34 +10,51 @@
             background: white;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             height: 100vh;
+            touch-action: manipulation;
         }
         .button {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             background: #ff0000;
             border-radius: 50%;
-            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
             cursor: pointer;
-            border: none;
-            outline: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+        .button:active {
+            transform: scale(0.95);
+            background: #cc0000;
         }
     </style>
 </head>
 <body>
-    <button class="button" id="btn"></button>
+    <div class="button" id="soundButton">НАЖМИ!</div>
 
     <script>
-        const btn = document.getElementById('btn');
-        const audio = new Audio('https://www.myinstants.com/media/sounds/oriol-11420.mp3');
+        // Фикс для iOS/Android
+        let audio = new Audio();
+        audio.src = "https://www.myinstants.com/media/sounds/oriol-11420.mp3";
+        audio.preload = "auto";
         
-        // Разблокировка аудио на iOS
-        document.addEventListener('touchstart', () => {}, { once: true });
+        // Разблокировка аудио при первом касании
+        document.getElementById('soundButton').addEventListener('touchstart', function() {
+            audio.play().then(() => audio.pause());
+        }, { once: true });
         
-        btn.addEventListener('click', () => {
+        // Основное воспроизведение
+        document.getElementById('soundButton').addEventListener('click', function() {
             audio.currentTime = 0;
-            audio.play().catch(e => console.log(e));
+            audio.play().catch(e => alert("Нажмите 'Разрешить' если браузер запросил доступ к звуку"));
         });
     </script>
 </body>
